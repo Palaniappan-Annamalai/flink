@@ -93,6 +93,12 @@ public class KafkaFlink {
 
 
 
+
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
+
+        executor.scheduleWithFixedDelay(new Scheduler(),2,1, TimeUnit.MINUTES);
+
+
 //        SavePointRetrieve save = new SavePointRetrieve();
 //        DataStream<String> dataStream = save.read(env);
 //
@@ -101,9 +107,6 @@ public class KafkaFlink {
 
         env.execute("my-job");
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
-
-        executor.scheduleWithFixedDelay(new Scheduler(),2,1, TimeUnit.MINUTES);
 
 
 

@@ -46,6 +46,7 @@ public class Scheduler implements Runnable{
 
         System.out.println(sb.toString());
         String originalDBPath = sb.toString() + "/db";
+        System.out.println(originalDBPath);
         return originalDBPath;
     }
 

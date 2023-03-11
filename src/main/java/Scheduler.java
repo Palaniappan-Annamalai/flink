@@ -20,7 +20,7 @@ public class Scheduler implements Runnable{
     public void run() {
 
         try {
-            Thread.sleep(20000);
+            Thread.sleep(40000);
             this.getData("/home/vagrant/rocksdb");
 
         }

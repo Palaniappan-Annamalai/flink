@@ -7,9 +7,7 @@ import org.apache.flink.core.memory.DataInputDeserializer;
 import org.apache.log4j.Logger;
 import org.rocksdb.*;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +30,7 @@ public class Scheduler implements Runnable{
 
 
     private String getPath(String path) throws Exception{
+
         ProcessBuilder processBuilder1 = new ProcessBuilder("bash","-c","find "+ path + " -name job_* | head -1");
         Process process1 = processBuilder1.start();
 
@@ -50,6 +49,14 @@ public class Scheduler implements Runnable{
     }
 
     private void getData(String path) throws Exception{
+
+
+        File file = new File("/home/vagrant/output.txt");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+
+
         RocksDB.loadLibrary();
         String previousIntColumnFamily = "my-state";
         byte[] previousIntColumnFamilyBA = previousIntColumnFamily.getBytes(StandardCharsets.UTF_8);
@@ -100,6 +107,10 @@ public class Scheduler implements Runnable{
                             logger.info("------Data------");
                             logger.info("key : " + tuple2.f0 + " | Value : " + tuple2.f1);
 
+                            FileOutputStream fos = new FileOutputStream(file);
+                            String data = "Key : " + tuple2.f0 + " | Value : " + tuple2.f1;
+                            fos.write(data.getBytes(StandardCharsets.UTF_8));
+                            fos.close();
                             iterator.next();
 
                         }

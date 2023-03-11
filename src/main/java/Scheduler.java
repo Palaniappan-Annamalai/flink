@@ -41,11 +41,11 @@ public class Scheduler implements Runnable{
 
         String line;
         while ((line = br.readLine()) != null) {
-            sb.append(line + System.lineSeparator());
+            sb.append(line);
         }
 
         System.out.println("job : " + sb.toString());
-        sb.append("/db/");
+        sb.append("/db");
         String finalPath = sb.toString();
         System.out.println("Final Path : " + finalPath);
         return finalPath;

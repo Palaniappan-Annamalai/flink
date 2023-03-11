@@ -44,10 +44,11 @@ public class Scheduler implements Runnable{
             sb.append(line + System.lineSeparator());
         }
 
-        System.out.println(sb.toString());
-        String originalDBPath = sb.toString() + "/db";
-        System.out.println(originalDBPath);
-        return originalDBPath;
+        System.out.println("job : " + sb.toString());
+        sb.append("/db");
+        String finalPath = sb.toString();
+        System.out.println("Final Path : " + finalPath);
+        return finalPath;
     }
 
     private void getData(String path) throws Exception{

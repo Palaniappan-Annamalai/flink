@@ -46,6 +46,12 @@ import java.util.concurrent.TimeUnit;
 
 public class KafkaFlink {
 
+    static {
+
+        Thread thread1 = new Thread(new Scheduler());
+        thread1.start();
+    }
+
     public static void main(String[] args) throws Exception {
 
 
@@ -100,10 +106,6 @@ public class KafkaFlink {
 
 
         env.execute("my-job");
-
-
-        Thread thread1 = new Thread(new Scheduler());
-        thread1.start();
 
 
 
